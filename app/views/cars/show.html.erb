@@ -1,0 +1,17 @@
+<h1><%=@car.make + " " + @car.model%></h1>
+<h3>
+    <%if @car.garage_id%>
+        <%="Location: " + @car.garage.name%>
+    <%else%>
+        <%="This vehicle is not in " + @car.garage.name%>
+    <%end%>
+
+</h3>
+<div>
+    <h3>Current Drivers:</h3>
+    <p>
+        <%@car.users.each do |user|%>
+        <%= link_to user.name, user_path(user)%><br>
+        <% end %>
+    </p>
+</div>

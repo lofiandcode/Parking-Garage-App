@@ -1,0 +1,17 @@
+<h1>Car Form</h1>
+
+<%= form_for(@car) do |f|%>
+    <label>Car Make:</label><br>
+    <%= f.text_field :make %><br>
+
+    <label>Car Model:</label><br>
+    <%= f.text_field :model %><br>
+
+    <label>Car License Plate:</label><br>
+    <%= f.text_field :license_plate %><br><br>
+
+    <label>Parking Garage:</label><br>
+    <%= collection_select(:car, :garage_id, Garage.all, :id, :name)%><br><br>
+    
+    <%= f.submit %>
+<% end %>

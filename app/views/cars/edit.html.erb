@@ -1,0 +1,47 @@
+<h1>Car Form</h1>
+
+<%= form_for(@car) do |f|%>
+    <label>Car Make:</label><br>
+    <%= f.text_field :make %><br>
+
+    <label>Car Model:</label><br>
+    <%= f.text_field :model %><br>
+
+    <label>Car License Plate:</label><br>
+    <%= f.text_field :license_plate %><br><br>
+
+    <label>Parking Garage:</label><br>
+    <%= collection_select(:car, :garage_id, Garage.all, :id, :name)%><br><br>
+
+    <label>Drivers (Select all that apply):</label><br>
+    <% User.all.each do |user| %>
+        <input type="checkbox" name="car[:users][]" id="user_<%=user.id%>" value="<%= user.id %>"><%= user.name %></input>
+        <br>
+      <% end %>
+      <br>
+    
+    <%= f.submit %>
+<% end %>
+
+<input type="checkbox" name="[:user_id][]" id="user_<%=user.id%>" 
+        value="<%= user.id %>"> <%= user.name %> <br>
+         
+
+      <label>Drivers (Select all that apply):</label><br>
+    <% User.all.each do |user| %>
+     
+      <%= check_box_tag(:user_id[]) %>
+      <%= label_tag(:user_id[], user.name) %>
+
+    <% end %>
+    <br>
+
+
+    <% User.all.each do |user| %>
+     
+
+      <%= check_box_tag(:user_id) %>
+      <%= label_tag(:user_id, user.name) %>
+
+    <% end %>
+    <br>

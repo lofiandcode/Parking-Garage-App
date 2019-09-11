@@ -1,0 +1,18 @@
+<h2><%=@user.name%></h2>
+<p>
+    <label>My Cars:</label><br>
+    <%@user.cars.each do |car|%>
+        <%= link_to car.make + " " + car.model, car_path(car)%><br>
+    <% end %>
+</p>
+<p>
+    <label>All Users on My Account:</label><br>
+        <%co_users = User.all.where(family_id: @user.family_id).select {
+            |user| user != @user
+        }%>
+    <%co_users.each do |user|%>
+        <%=user.name%><br>
+    <% end %>
+</p>
+<%= link_to "Add Car To Account", new_car_path%><br>
+<%= link_to "Add User To Account", new_user_path%><br>

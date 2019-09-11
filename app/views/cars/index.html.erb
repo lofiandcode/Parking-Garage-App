@@ -1,0 +1,3 @@
+<% @cars.each do |car|%>
+    <div><%=link_to car.make + " " + car.model, car_path(car)%></div>
+<% end %>
