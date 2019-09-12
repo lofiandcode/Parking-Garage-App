@@ -35,13 +35,14 @@ class CarsController < ApplicationController
         @car = Car.find(params[:id])
         
         if @car.update(car_params)
+            update_user_car(@car, params[:car][:user_ids])
             flash[:success] = 'Car information updated successfully!'
         else
             flash[:errors] = 'Car information update failed'
             render :edit
         end
 
-        update_user_car(@car, params[:car][:user_ids])
+        
 
         redirect_to car_path(@car)
     end
@@ -58,21 +59,14 @@ class CarsController < ApplicationController
     def car_params
         params.require(:car).permit(:make, :model, :license_plate, :garage_id)
     end
-
+    
+    #Look up info on additional renders in private helper methods
     def update_user_car (car, new_user_ids)
-        
         UserCar.delete_by_car(car)
-
         @new_list_of_drivers = new_user_ids
-
         @new_list_of_drivers.each do |user_id|
             updated_user_car = UserCar.new(user_id: user_id, car: car)
-            if updated_user_car.save
-                flash[:success] = 'Driver updated successfully!'
-            else
-                flash[:errors] = 'Driver update failed'
-                # render :edit
-            end
+            updated_user_car.save
         end
     end
 end

@@ -1,0 +1,18 @@
+<h1>Family Form</h1>
+
+<%= form_for(@family) do |f|%>
+    <label>Current Users on this Account:</label><br>
+    <<%co_users = User.all.where(family_id: @user.family_id).select {
+        |user| user != @user
+    }%>
+    <%co_users.each do |user|%>
+        <%=user.name%><br>
+    <% end %>
+    
+    <label>Check box to Add or Uncheck to Remove Users:</label><br>
+    <%= collection_check_boxes(:car, :user_ids, User.all, :id, :name) %><br>
+
+    <%= link_to "Create a New User", new_user_path %>
+    
+    <%= f.submit %>
+<% end %>

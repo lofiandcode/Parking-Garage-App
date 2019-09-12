@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_families
   resources :user_cars #, :except => [:new]
   #get '/user_cars/:id/new', to: 'user_cars#new', as: 'new_user_car'
   resources :garages

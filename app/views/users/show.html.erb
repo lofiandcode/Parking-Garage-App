@@ -7,12 +7,18 @@
 </p>
 <p>
     <label>All Users on My Account:</label><br>
-        <%co_users = User.all.where(family_id: @user.family_id).select {
-            |user| user != @user
-        }%>
+    <%co_users = User.all.where(family_id: @user.family_id).select {
+        |user| user != @user
+    }%>
     <%co_users.each do |user|%>
         <%=user.name%><br>
     <% end %>
 </p>
-<%= link_to "Add Car To Account", new_car_path%><br>
-<%= link_to "Add User To Account", new_user_path%><br>
+<div>
+<%= link_to "Add New Car to Account", new_car_path%><br>
+<%= link_to "Add New/Existing User to Account", edit_family_path(@user.family_id)%><br>
+</div>
+<div>
+<%=link_to "Edit User", edit_user_path(@user)%><br>
+<%= link_to 'Delete User', user_path(@user), method: :delete, data: { confirm: 'Are you sure?' } %> 
+</div>

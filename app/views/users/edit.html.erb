@@ -1,8 +1,14 @@
-<h1>User Form</h1>
+<h1>Edit Account</h1>
 
 <%= form_for(@user) do |f|%>
     <label>User name:</label><br>
     <%= f.text_field :name %><br>
-    
+
+    <label>Select All users you want to share this account:</label><br>
+    <%co_users = User.all.where(family_id: @user.family_id).select {
+            |user| user != @user
+        }%>
+    <%= collection_check_boxes(:user, :user_ids, co_users, :id, :name) %><br>
+
     <%= f.submit %>
 <% end %>

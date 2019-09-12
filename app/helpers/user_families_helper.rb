@@ -1,0 +1,2 @@
+module UserFamiliesHelper
+end

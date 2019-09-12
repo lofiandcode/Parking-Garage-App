@@ -7,7 +7,7 @@ class UserCar < ApplicationRecord
         joins.each {|join| join.destroy}
     end
 
-    def self.delet_by_user(user)
+    def self.delete_by_user(user)
         joins = UserCar.where(user_id: user.id)
         joins.each {|join| join.destroy}
     end

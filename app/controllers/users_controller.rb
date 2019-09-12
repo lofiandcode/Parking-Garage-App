@@ -28,9 +28,16 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
     end
 
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        UserCar.delete_by_user(@user)
+        redirect_to users_path, notice: "Delete Successful"
+    end
+
     private
 
     def user_params
-        params.require(:user).permit(:name)
+        params.require(:user).permit(:name, :user_ids,)
     end
 end
