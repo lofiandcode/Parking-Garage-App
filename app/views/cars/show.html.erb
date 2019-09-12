@@ -1,7 +1,9 @@
 <h1><%=@car.make + " " + @car.model%></h1>
 
 <p></p>
-<%=link_to "Edit", edit_car_path(@car)%>
+<%=link_to "Edit Car Information", edit_car_path(@car)%><br>
+<%=link_to "Add Drivers", edit_user_car_path(@car)%>
+
 <p></p>
 
 <div>

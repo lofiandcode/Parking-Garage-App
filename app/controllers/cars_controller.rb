@@ -28,23 +28,28 @@ class CarsController < ApplicationController
     end
     
     def edit
-        # byebug
         @car = Car.find(params[:id])
     end
 
     def update
-        # @garage = Garage.find(car_params[:garage_id])
-        if @car = Car.update( make: car_params[:make], model: car_params[:model], license_plate: car_params[:license_plate], garage: @garage)
-            puts "Updated"
+        @car = Car.find(params[:id])
+        byebug
+        if @car.update(car_params)
+            # puts "Updated"
         else
-            puts "did not update"
+            # puts "did not update"
             render :edit
         end
-        byebug
-        params[:car][:user_ids].each do |user_id| 
-            puts "Hi 45"
-            UserCar.find_or_create_by(user_id: user_id, car: @car)
-        end
+
+        @current_driver_joins = UserCar.where(car: @car)
+        @new_list_of_drivers = params[:car][:user_ids]
+
+        
+
+        # byebug
+        # params[:car][:user_ids].each do |user_id| 
+        #     UserCar.find_or_create_by(user_id: user_id, car: @car)
+        # end
     
         redirect_to car_path(@car)
     end
@@ -52,10 +57,6 @@ class CarsController < ApplicationController
     private
 
     def car_params
-        params.require(:car).permit(:make, :model, :license_plate, :garage_id, :id)
+        params.require(:car).permit(:make, :model, :license_plate, :garage_id)
     end
-
-    # def user_params
-    #     params.permit(user_id)
-    # end
 end

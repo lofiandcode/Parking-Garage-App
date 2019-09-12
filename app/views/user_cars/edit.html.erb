@@ -1,0 +1,14 @@
+<h1>Add Drivers Form</h1>
+
+<%= form_for(@car) do |f|%>
+    <label>Car Make: <%=@car.make %></label><br>
+    
+    <label>Car Model: <%=@car.model %></label><br>
+
+    <label>Car License Plate: <%=@car.license_plate %></label><br><br>
+    
+    <label>Select Drivers You Want To Add:</label><br>
+    <%= collection_check_boxes(:car, :user_ids, User.all, :id, :name) %>
+
+    <%= f.submit %>
+<% end %>
