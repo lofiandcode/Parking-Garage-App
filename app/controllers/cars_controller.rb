@@ -33,18 +33,27 @@ class CarsController < ApplicationController
 
     def update
         @car = Car.find(params[:id])
-        byebug
+        # byebug
         if @car.update(car_params)
-            # puts "Updated"
+            flash[:success] = 'Car information updated successfully!'
         else
-            # puts "did not update"
+            flash[:errors] = 'Car information update failed'
             render :edit
         end
 
         @current_driver_joins = UserCar.where(car: @car)
+        @current_driver_joins.each {|user_car_join| user_car_join.destroy }
         @new_list_of_drivers = params[:car][:user_ids]
 
-        
+        @new_list_of_drivers.each do |user_id|
+            updated_user_car = UserCar.new(user_id: user_id, car: @car)
+            if updated_user_car.save
+                flash[:success] = 'Driver updated successfully!'
+            else
+                flash[:errors] = 'Driver update failed'
+                render :edit
+            end
+        end
 
         # byebug
         # params[:car][:user_ids].each do |user_id| 

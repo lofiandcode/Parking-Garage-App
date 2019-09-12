@@ -25,7 +25,11 @@ class UserCarsController < ApplicationController
         redirect_to car_path(@car)
     end
 
-    # private
+    def destroy
+
+    end
+    
+    private
 
     def user_car_params
         params.require(:user_car).permit(:user_id, :car_id)
