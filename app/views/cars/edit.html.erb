@@ -12,15 +12,10 @@
 
     <label>Parking Garage:</label><br>
     <%= collection_select(:car, :garage_id, Garage.all, :id, :name)%><br><br>
-
-    <label>Drivers (Select all that apply):</label><br>
-    <% User.all.each do |user| %>
-        <input type="checkbox" name="car[:users][]" id="user_<%=user.id%>" value="<%= user.id %>"><%= user.name %></input>
-        <br>
-      <% end %>
-      <br>
     
+    <label>Select All Drivers For This Car:</label><br>
+    <%= collection_check_boxes(:car, :user_ids, User.all, :id, :name) %>
+    <%#= collection_check_boxes (:user_ids, User.all, :id, :name) %>
+
     <%= f.submit %>
 <% end %>
-
-    
