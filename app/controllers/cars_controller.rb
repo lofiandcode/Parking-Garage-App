@@ -20,8 +20,11 @@ class CarsController < ApplicationController
             license_plate: car_params[:license_plate],
             garage: @garage
         )
-        
-        redirect_to new_user_car_path(@car)
+        params[:car][:user_ids].each do |user_id| 
+            UserCar.create(user_id: user_id, car: @car)
+        end
+        byebug
+        redirect_to car_path(@car)
     end
     
     def edit

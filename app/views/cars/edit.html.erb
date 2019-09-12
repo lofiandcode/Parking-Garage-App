@@ -23,25 +23,4 @@
     <%= f.submit %>
 <% end %>
 
-<input type="checkbox" name="[:user_id][]" id="user_<%=user.id%>" 
-        value="<%= user.id %>"> <%= user.name %> <br>
-         
-
-      <label>Drivers (Select all that apply):</label><br>
-    <% User.all.each do |user| %>
-     
-      <%= check_box_tag(:user_id[]) %>
-      <%= label_tag(:user_id[], user.name) %>
-
-    <% end %>
-    <br>
-
-
-    <% User.all.each do |user| %>
-     
-
-      <%= check_box_tag(:user_id) %>
-      <%= label_tag(:user_id, user.name) %>
-
-    <% end %>
-    <br>
+    

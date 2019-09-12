@@ -3,6 +3,7 @@
 
     <label>Select All Drivers For This Car:</label><br>
     <%= collection_select(:use_car, :user_id, User.all, :id, :name)%><br><br>
+    <label>Select All Drivers For This Car:</label><br>
     
     <input name="car_id" type="hidden" value = <%@car.id%> >
     <%= f.submit %>
