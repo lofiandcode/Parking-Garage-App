@@ -33,7 +33,7 @@ class CarsController < ApplicationController
 
     def update
         @car = Car.find(params[:id])
-        # byebug
+        
         if @car.update(car_params)
             flash[:success] = 'Car information updated successfully!'
         else
@@ -41,31 +41,38 @@ class CarsController < ApplicationController
             render :edit
         end
 
-        @current_driver_joins = UserCar.where(car: @car)
-        @current_driver_joins.each {|user_car_join| user_car_join.destroy }
-        @new_list_of_drivers = params[:car][:user_ids]
+        update_user_car(@car, params[:car][:user_ids])
 
-        @new_list_of_drivers.each do |user_id|
-            updated_user_car = UserCar.new(user_id: user_id, car: @car)
-            if updated_user_car.save
-                flash[:success] = 'Driver updated successfully!'
-            else
-                flash[:errors] = 'Driver update failed'
-                render :edit
-            end
-        end
-
-        # byebug
-        # params[:car][:user_ids].each do |user_id| 
-        #     UserCar.find_or_create_by(user_id: user_id, car: @car)
-        # end
-    
         redirect_to car_path(@car)
+    end
+
+    def destroy
+        @car = Car.find(params[:id])
+        @car.destroy
+        UserCar.delete_by_car(@car)
+        redirect_to cars_path, notice: "Delete Successful"
     end
 
     private
 
     def car_params
         params.require(:car).permit(:make, :model, :license_plate, :garage_id)
+    end
+
+    def update_user_car (car, new_user_ids)
+        
+        UserCar.delete_by_car(car)
+
+        @new_list_of_drivers = new_user_ids
+
+        @new_list_of_drivers.each do |user_id|
+            updated_user_car = UserCar.new(user_id: user_id, car: car)
+            if updated_user_car.save
+                flash[:success] = 'Driver updated successfully!'
+            else
+                flash[:errors] = 'Driver update failed'
+                # render :edit
+            end
+        end
     end
 end
