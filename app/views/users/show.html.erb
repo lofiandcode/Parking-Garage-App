@@ -6,13 +6,13 @@
     <% end %>
 </p>
 <p>
-    <label>All Users on My Account:</label><br>
-    <%co_users = User.all.where(family_id: @user.family_id).select {
-        |user| user != @user
-    }%>
-    <%co_users.each do |user|%>
-        <%=user.name%><br>
+    
+<div>
+    <label>Your Group Accounts:</label><br>
+    <%@user.families.each do |family|%>
+    <%= link_to family.name, family_path(family)%><br>
     <% end %>
+</div>
 </p>
 <div>
 <%= link_to "Add New Car to Account", new_car_path%><br>

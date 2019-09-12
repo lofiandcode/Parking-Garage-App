@@ -11,15 +11,16 @@ User.destroy_all
 Garage.destroy_all
 Car.destroy_all
 UserCar.destroy_all
+UserFamily.destroy_all
 
-knutsens = Family.create(name: "Knutsens")
-jansens = Family.create(name: "Jansens")
+knutsens = Family.create()
+jansens = Family.create()
 
-knut = User.create(name: "Knut Knutsen", family_id: knutsens.id)
-nina = User.create(name: "Nina Knutsen", family_id: knutsens.id)
-sven = User.create(name: "Sven Knutsen", family_id: knutsens.id)
-gry = User.create(name: "Gry Jansen", family_id: jansens.id)
-jan = User.create(name: "Jan Jansen", family_id: jansens.id)
+knut = User.create(name: "Knut Knutsen")
+nina = User.create(name: "Nina Knutsen")
+sven = User.create(name: "Sven Knutsen")
+gry = User.create(name: "Gry Jansen")
+jan = User.create(name: "Jan Jansen")
 
 acme_parking = Garage.create(name: "Acme Parking Garage")
 
@@ -40,6 +41,11 @@ UserCar.create(user: gry, car: taurus)
 UserCar.create(user: jan, car: f_150)
 UserCar.create(user: jan, car: taurus)
 
+UserFamily.create(user: knut, family: knutsens)
+UserFamily.create(user: nina, family: knutsens)
+UserFamily.create(user: sven, family: knutsens)
+UserFamily.create(user: gry, family: jansens)
+UserFamily.create(user: jan, family: jansens)
 
 
 puts "Seeds done."
