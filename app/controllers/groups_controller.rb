@@ -40,20 +40,36 @@ class GroupsController < ApplicationController
     def update_user_group (group, new_user_ids)
         # byebug
         UserGroup.delete_by_group(group)
+        # new_user_ids.shift
         @new_list_of_users = new_user_ids
+        # byebug
         @new_list_of_users.each do |user_id|
             updated_user_group = UserGroup.new(user_id: user_id, group: group)
             updated_user_group.save
+            # byebug
+            # user = User.find(user_id)
+            # byebug
+            # UserGroup.delete_by_group(user.groups)
         end
     end
 
     def create_new_group_if_not_in_group(current_group, users_in_group)
         users_in_group.each do |user|
-            groups = user.groups
-            if !(groups.length > 1) && groups.length != 0
+            group_joins = UserGroup.where(user: user)
+            if !(group_joins.length > 1) && group_joins.length != 0
                 new_group = Group.create(name: "Not in a Group")
-                UserGroup.create(group: new_group, user: user)
+                UserGroup.create(group: new_group, user: user)  
             end
+        end
+    end
+
+    def delete_empty_groups(groups)
+            empty_group = groups.select {|group| group.name == "Not in a Group"}
+        if empty_group.length == 1
+            empty_group_join = UserGroup.find_by(group: empty_group)
+            # byebug
+            empty_group.destroy
+            empty_group_join.destroy
         end
     end
 

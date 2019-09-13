@@ -3,6 +3,7 @@ class UserGroup < ApplicationRecord
     belongs_to :user
 
     def self.delete_by_group(group)
+        # byebug
         joins = UserGroup.where(group_id: group.id)
         joins.each {|join| join.destroy}
     end

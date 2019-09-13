@@ -12,9 +12,13 @@ class UsersController < ApplicationController
     end
 
     def create
-        byebug
-        @family = Family.create
-        @user = User.create(name: user_params[:user][:name], family_id: @family.id)
+        # byebug
+        @group = Group.create(name: "Not in a Group")
+        # byebug
+        @user = User.create(user_params)
+        # byebug
+        UserGroup.create(user: @user, group: @group)
+        # byebug
         redirect_to user_path(@user)
     end
     
