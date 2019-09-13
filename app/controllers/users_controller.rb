@@ -12,13 +12,9 @@ class UsersController < ApplicationController
     end
 
     def create
-        # byebug
         @group = Group.create(name: "Not in a Group")
-        # byebug
         @user = User.create(user_params)
-        # byebug
         UserGroup.create(user: @user, group: @group)
-        # byebug
         redirect_to user_path(@user)
     end
     
@@ -28,7 +24,14 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        @user.update(user_params)
+        if @user.update(name: user_params[:name])
+            # byebug
+            # update_user_group(@user, user_params[:user][:user_ids])
+            flash[:success] = 'User information updated successfully!'
+        else
+            flash[:errors] = 'User information update failed'
+            render :edit
+        end
         redirect_to user_path(@user)
     end
 
@@ -44,4 +47,13 @@ class UsersController < ApplicationController
     def user_params
         params.require(:user).permit(:name, :user_ids,)
     end
+
+    # def update_user_group (user, new_user_ids)
+    #     UserGroup.delete_by_car(user)
+    #     @new_list_of_drivers = new_user_ids
+    #     @new_list_of_drivers.each do |user_id|
+    #         updated_user_car = UserCar.new(user_id: user_id, car: car)
+    #         updated_user_car.save
+    #     end
+    # end
 end

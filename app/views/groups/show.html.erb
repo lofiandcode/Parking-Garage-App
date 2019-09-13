@@ -1,7 +1,7 @@
 <div>
     <label>Group Account: <%=@group.name%></label><br><br>
     <%@group.users.each do |user|%>
-        <%=user.name%><br>
+        <%=link_to user.name, user_path(user)%><br>
     <%end%>
 </div>
 <br>
