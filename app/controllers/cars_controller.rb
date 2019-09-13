@@ -42,15 +42,13 @@ class CarsController < ApplicationController
             render :edit
         end
 
-        
-
         redirect_to car_path(@car)
     end
 
     def destroy
         @car = Car.find(params[:id])
-        @car.destroy
         UserCar.delete_by_car(@car)
+        @car.destroy
         redirect_to cars_path, notice: "Delete Successful"
     end
 

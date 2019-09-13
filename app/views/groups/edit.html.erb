@@ -1,13 +1,16 @@
 <h1>Group Form</h1>
 
     <%= form_for(@group) do |f|%>
-        
+        <label>Group Name:</label><br>
+        <%= f.text_field :name%><br>
+        <br>
         <label>Check box to Add or Uncheck to Remove Users:</label><br>
         <%= collection_check_boxes(:group, :user_ids, User.all, :id, :name) %><br>
-        
+        <br>
         <%= f.submit %><br>
     <% end %>
 <br>
 <div>
     <%= link_to "Create a New User", new_user_path %>
+    <%= link_to "Delete Group", group_path(@group), method: :delete, data: { confirm: 'Are you sure?' }%>
 </div>

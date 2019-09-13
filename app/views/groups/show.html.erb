@@ -7,4 +7,5 @@
 <br>
 <div>   
     <%=link_to "Edit", edit_group_path(@group)%>
+    <%= link_to 'Delete', group_path(@group), method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
