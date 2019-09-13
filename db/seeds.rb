@@ -6,15 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Family.destroy_all
+Group.destroy_all
 User.destroy_all
 Garage.destroy_all
 Car.destroy_all
 UserCar.destroy_all
-UserFamily.destroy_all
+UserGroup.destroy_all
 
-knutsens = Family.create()
-jansens = Family.create()
+knutsens = Group.create(name: "Knutsens")
+jansens = Group.create(name: "Jansens")
 
 knut = User.create(name: "Knut Knutsen")
 nina = User.create(name: "Nina Knutsen")
@@ -41,11 +41,11 @@ UserCar.create(user: gry, car: taurus)
 UserCar.create(user: jan, car: f_150)
 UserCar.create(user: jan, car: taurus)
 
-UserFamily.create(user: knut, family: knutsens)
-UserFamily.create(user: nina, family: knutsens)
-UserFamily.create(user: sven, family: knutsens)
-UserFamily.create(user: gry, family: jansens)
-UserFamily.create(user: jan, family: jansens)
+UserGroup.create(user: knut, group: knutsens)
+UserGroup.create(user: nina, group: knutsens)
+UserGroup.create(user: sven, group: knutsens)
+UserGroup.create(user: gry, group: jansens)
+UserGroup.create(user: jan, group: jansens)
 
 
 puts "Seeds done."

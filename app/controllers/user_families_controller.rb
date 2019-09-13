@@ -1,2 +1,0 @@
-class UserFamiliesController < ApplicationController
-end

@@ -9,14 +9,14 @@
     
 <div>
     <label>Your Group Accounts:</label><br>
-    <%@user.families.each do |family|%>
-    <%= link_to family.name, family_path(family)%><br>
+    <%@user.groups.each do |group|%>
+    <%= link_to group.name, group_path(group)%><br>
     <% end %>
 </div>
 </p>
 <div>
 <%= link_to "Add New Car to Account", new_car_path%><br>
-<%= link_to "Add New/Existing User to Account", edit_family_path(@user.family_id)%><br>
+<%= link_to "Add New/Existing User to Account", edit_group_path(@user.groups.first.id)%><br>
 </div>
 <div>
 <%=link_to "Edit User", edit_user_path(@user)%><br>

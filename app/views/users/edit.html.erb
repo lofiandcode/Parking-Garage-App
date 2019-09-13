@@ -5,7 +5,7 @@
     <%= f.text_field :name %><br>
 
     <label>Select All users you want to share this account:</label><br>
-    <%co_users = User.all.where(family_id: @user.family_id).select {
+    <%co_users = User.all.where(group_id: @user.group_id).select {
             |user| user != @user
         }%>
     <%= collection_check_boxes(:user, :user_ids, co_users, :id, :name) %><br>
