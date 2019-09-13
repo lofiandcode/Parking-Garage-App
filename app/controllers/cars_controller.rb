@@ -23,7 +23,7 @@ class CarsController < ApplicationController
         params[:car][:user_ids].each do |user_id| 
             UserCar.create(user_id: user_id, car: @car)
         end
-        # byebug
+        
         redirect_to car_path(@car)
     end
     

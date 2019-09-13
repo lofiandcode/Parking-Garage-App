@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
         
         if @group.update(group_params)
-            byebug
+    
             update_user_group(@group, params[:group][:user_ids])
             flash[:success] = 'group information updated successfully!'
         else
@@ -39,17 +39,17 @@ class GroupsController < ApplicationController
 
     #Look up info on additional renders in private helper methods
     def update_user_group (group, new_user_ids)
-        # byebug
+        
         UserGroup.delete_by_group(group)
         new_user_ids.shift
-        # byebug
+        
         new_user_ids.each do |user_id|
             updated_user_group = UserGroup.new(user_id: user_id, group: group)
             updated_user_group.save
-            # byebug
+            
             puts ''
             user = User.find(user_id)
-            byebug
+            
             delete_empty_groups(user.groups)
         end
     end
@@ -65,12 +65,10 @@ class GroupsController < ApplicationController
     end
 
     def delete_empty_groups(groups)
-            # byebug
             empty_group = groups.select {|group| group.name == "Not in a Group"}
 
         if empty_group.length == 1 && empty_group.length != 0
             empty_group_join = UserGroup.find_by(group: empty_group)
-            byebug
             empty_group.first.destroy
             empty_group_join.destroy
         end

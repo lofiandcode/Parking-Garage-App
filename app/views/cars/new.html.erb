@@ -14,7 +14,7 @@
     <%= collection_select(:car, :garage_id, Garage.all, :id, :name)%><br><br>
     
     <label>Select All Drivers For This Car:</label><br>
-    <%= collection_check_boxes(:car, :user_ids, User.all, :id, :name) %>
+    <%= collection_check_boxes(:car, :user_ids, User.all, :id, :name) %><br>
 
     <%= f.submit %>
 <% end %>

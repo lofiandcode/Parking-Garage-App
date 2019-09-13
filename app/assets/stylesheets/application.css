@@ -13,3 +13,60 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+    background-color:lightslategray;
+ }
+ 
+ .layout_wrapper {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-areas: 
+    "t t t t t t t t t t"
+    "e e e e e e e e e e"
+    "y y y y y y y y y y"
+    "y y y y y y y y y y"
+    "y y y y y y y y y y"
+    "y y y y y y y y y y";
+
+}
+
+.layout_wrapper > div {
+    
+}
+
+.layout_title {
+    justify-self: center;
+    grid-area: t;
+}
+
+.layout_errors {
+    justify-self: center;
+    grid-area: e;
+}
+
+.layout_yield {
+    grid-area: y;
+}
+
+.user_new_wrapper {
+    display: grid;
+    background-color: lightseagreen;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-areas: 
+    "t t t t t t t t t t"
+    "f f f f f f f f f f"
+    "f f f f f f f f f f";
+}
+
+.user_new_wrapper > div {
+    justify-self: center;
+}
+
+.user_new_title {
+    grid-area: t;
+}
+
+.user_new_form {
+    grid-area: f;
+}

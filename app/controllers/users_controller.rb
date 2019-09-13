@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user.update(name: user_params[:name])
-            # byebug
+            
             # update_user_group(@user, user_params[:user][:user_ids])
             flash[:success] = 'User information updated successfully!'
         else

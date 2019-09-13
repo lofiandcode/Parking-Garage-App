@@ -10,14 +10,20 @@
   </head>
 
   <body>
-    <h1>Acme Parking</h1>
-    <div>
-      <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
-      <% end -%>
-    </div><br>
-
-    <%= yield %>
-    
+    <div class="layout_wrapper">
+      <div class="layout_title">
+        <h1>Acme Parking</h1>
+      </div>
+      <div class="layout_errors">
+        <% flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, class: name %>
+        <% end -%>
+      </div><br>
+      <div class="layout_yield">
+        <%= yield %>
+      </div>
+      <div class="layout_footer">
+      </div>
+    </div>
   </body>
 </html>
